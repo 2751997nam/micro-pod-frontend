@@ -1,0 +1,52 @@
+services:
+    frontend-api:
+        build:
+            context: ./
+            args:
+                PROJECT_PATH: ./frontend-api
+            dockerfile: ./docker/nodejs/Dockerfile.nodejs.local
+        env_file:
+            - ./frontend-api/.env
+        command: sh /var/www/start/start.sh
+        ports:
+            - 8102:3000
+        volumes:
+            - ./docker/nodejs/start:/var/www/start
+            - ./frontend-api:${WORKDIR}
+        networks:
+            - micro-pod
+        depends_on:
+            - redis
+            - rabbitmq
+            - elasticsearch
+        extra_hosts:
+          - "host.docker.internal:host-gateway"
+    redis:
+        image: redis:alpine
+        ports:
+            - ${FORWARD_REDIS_PORT:-6312}:6379
+        volumes:
+            - ${REDIS_VOLUME_LOCAL:-./data/database/redis-data}:/data
+        networks:
+            - micro-pod
+        healthcheck:
+            test:
+                - CMD
+                - redis-cli
+                - ping
+            retries: 3
+            timeout: 5s
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        ports:
+            - 5612:5672
+            - 15612:15672
+        volumes:
+            - ./data/rabbitmq/data/:/var/lib/rabbitmq/
+            - ./data/rabbitmq/log/:/var/log/rabbitmq
+            - ./rabbitmq/enabled_plugins/:/etc/rabbitmq/enabled_plugins
+        networks:
+            - micro-pod
+networks:
+    micro-pod:
+        driver: bridge

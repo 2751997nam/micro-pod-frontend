@@ -1,0 +1,86 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "prettier"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "eslint-config-prettier",
+        "prettier"
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "rules": {
+        "no-undef": "error",
+        "semi": "error",
+        "semi-spacing": "error",
+
+        "eqeqeq": "warn",
+        "no-invalid-this": "error",
+        "no-return-assign": "error",
+        "no-unused-expressions": ["error", { "allowTernary": true }],
+        "no-useless-concat": "error",
+        "no-useless-return": "error",
+        "no-constant-condition": "warn",
+
+        "indent": ["error", 4, { "SwitchCase": 4 }],
+        "no-mixed-spaces-and-tabs": "warn",
+        "space-before-blocks": "error",
+        "space-in-parens": "error",
+        "space-infix-ops": "error",
+        "space-unary-ops": "error",
+        "quotes": ["error", "single"],
+        //
+        "max-len": ["error", { "code": 200 }],
+        "max-lines": ["error", { "max": 500 }],
+        "keyword-spacing": "error",
+        "multiline-ternary": ["error", "never"],
+        "no-mixed-operators": "error",
+        //
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+        "no-whitespace-before-property": "error",
+        "nonblock-statement-body-position": "error",
+        "object-property-newline": [
+            "error",
+            { "allowAllPropertiesOnSameLine": true }
+        ],
+
+        "arrow-spacing": "error",
+        "no-confusing-arrow": "error",
+        "no-duplicate-imports": "error",
+        "object-shorthand": "off",
+        "prefer-const": "warn",
+        "no-var": "error",
+        "prefer-template": "warn",
+
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|__" }],
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "warn",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "prettier/prettier": [
+            "warn",
+            {
+                "arrowParens": "always",
+                "semi": true,
+                "trailingComma": "none",
+                "tabWidth": 4,
+                "endOfLine": "auto",
+                "useTabs": false,
+                "singleQuote": true,
+                "printWidth": 120,
+                "jsxSingleQuote": true
+            }
+        ]
+    },
+    "globals": {
+        "__dirname": true,
+        "__dir": true,
+        "global": true,
+        "process": true,
+        "Buffer": true
+    }
+}
