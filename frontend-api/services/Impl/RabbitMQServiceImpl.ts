@@ -86,8 +86,7 @@ class RabbitMQServiceImpl implements RabbitMQService {
     }
 
     getConsumerQueue(event: IEvent): string {
-        const appName = Utils.toSnakeCase(`${process.env.APP_NAME}`);
-        return `${appName}_frontend`;
+        return `micro_pod_product_api_product`;
     }
 }
 

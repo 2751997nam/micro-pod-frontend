@@ -41,7 +41,7 @@ class ProductCreatedListener implements IListener {
     };
 
     getQueue(): string {
-        return `${process.env.APP_NAME}`.toLowerCase().replace(/_/g, '-');
+        return `micro_pod_product_api_product`;
     }
     getExchange(): string {
         return 'product.changed.fanout';
