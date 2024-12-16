@@ -25,6 +25,7 @@
         "no-useless-concat": "error",
         "no-useless-return": "error",
         "no-constant-condition": "warn",
+        "no-unused-vars": "warn",
 
         "indent": ["error", 4, { "SwitchCase": 4 }],
         "no-mixed-spaces-and-tabs": "warn",
@@ -56,11 +57,8 @@
         "no-var": "error",
         "prefer-template": "warn",
 
-        "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|__" }],
-        "@typescript-eslint/interface-name-prefix": "off",
-        "@typescript-eslint/explicit-function-return-type": "warn",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|__" }],
         "prettier/prettier": [
             "warn",
             {
