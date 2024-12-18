@@ -4,16 +4,23 @@ class EventDTO implements IEvent {
     queueName: string;
     routingKey: string;
     exchangeType: string;
+    exchange: string;
     data: any;
 
-    constructor(queueName: string, routingKey: string, exchangeType: string) {
+    constructor(queueName: string, exchange: string) {
+        const [_, routingKey, exchangeType] = exchange.split('.');
         this.queueName = queueName;
+        this.exchange = exchange;
         this.routingKey = routingKey;
         this.exchangeType = exchangeType;
     }
 
     getQueueName(): string {
         return this.queueName;
+    }
+
+    getExchange(): string {
+        return this.exchange;
     }
 
     getRoutingKey(): string {
@@ -30,6 +37,10 @@ class EventDTO implements IEvent {
 
     setQueueName(queueName: string): void {
         this.queueName = queueName;
+    }
+
+    setExchange(exchange: string): void {
+        this.exchange = exchange;
     }
 
     setRoutingKey(routingKey: string): void {

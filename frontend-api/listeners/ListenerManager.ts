@@ -21,7 +21,7 @@ class ListenerManager {
 
     public listens(): void {
         for (const listener of this.listeners.values()) {
-            this.rabbitMQService.consumeExchange(listener.getExchange(), listener.handle);
+            this.rabbitMQService.consumeExchange(listener.getExchange(), listener.getQueue(), listener.handle);
         }
     }
 }

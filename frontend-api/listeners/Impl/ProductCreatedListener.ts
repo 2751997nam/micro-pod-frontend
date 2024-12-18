@@ -43,6 +43,7 @@ class ProductCreatedListener implements IListener {
     getQueue(): string {
         return `micro_pod_product_api_product`;
     }
+    
     getExchange(): string {
         return 'product.changed.fanout';
     }

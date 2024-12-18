@@ -16,27 +16,27 @@ const CategorySchema = new Schema({
 });
 
 const ProductSchema = new Schema({
+    id: { type: Number, required: true },
     name: { type: String, required: true },
     slug: { type: String, required: true },
     price: { type: Number, required: true },
     high_price: { type: Number, required: false },
     image_url: { type: String, required: true },
-    product_id: { type: Number, required: true },
     description: { type: String, required: false },
     status: { type: String, required: true },
     category_id: { type: Number, required: false },
+    template_id: { type: Number, required: false },
     user: UserSchema,
     categories: [CategorySchema],
 });
 
 export type ProductDocument = Document & {
+    id: number,
     name: string,
     slug: string,
-    email: string,
     price: number,
     high_price: number,
     image_url: string,
-    product_id: number,
     description: string,
     status: string,
     category_id: string,

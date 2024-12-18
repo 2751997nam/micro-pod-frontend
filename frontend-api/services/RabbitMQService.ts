@@ -14,13 +14,9 @@ interface RabbitMQService {
 
     consumeEvent(event: IEvent, callback: (channel: Channel, message: ConsumeMessage | null) => void): void;
 
-    consumeExchange(exchange: string, callback: (channel: Channel, message: ConsumeMessage | null) => void): void;
+    consumeExchange(exchange: string, queueName: string, callback: (channel: Channel, message: ConsumeMessage | null) => void): void;
 
-    parseExchange(exchange: string): IEvent;
-
-    getExchange(event: IEvent): string;
-
-    getConsumerQueue(event: IEvent): string;
+    parseExchange(exchange: string, queueName: string): IEvent;
 }
 
 export default RabbitMQService;
