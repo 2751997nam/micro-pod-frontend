@@ -6,6 +6,7 @@ import { IProduct } from '~/interfaces/IProduct';
 import { ICategory } from '~/interfaces/ICategory';
 import { IUser } from '~/interfaces/IUser';
 import LogService from '~/services/LogService';
+import { IProductSaveData } from '~/dto/IProductSaveData';
 
 @singleton()
 class ProductCreatedListener implements IListener {
@@ -24,7 +25,7 @@ class ProductCreatedListener implements IListener {
         try {
             console.log('ProductCreatedListener', JSON.parse(parseMessage));
             const data = JSON.parse(parseMessage);
-            const product = data.data as IProduct;
+            const product = data.data as IProductSaveData;
             if (data.data.categories) {
                 product.categories = data.data.categories as ICategory[];
             }

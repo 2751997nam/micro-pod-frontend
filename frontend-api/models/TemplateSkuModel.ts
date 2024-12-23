@@ -8,6 +8,8 @@ const TemplateSkuSchema = new Schema({
     price: { type: Number, required: true },
     high_price: { type: Number, required: false },
     options: [Number]
+}, {
+    collection: 'template_skues'
 })
 
 export type TemplateSkuDocument = Document & {

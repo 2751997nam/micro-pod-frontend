@@ -28,6 +28,8 @@ const ProductSchema = new Schema({
     template_id: { type: Number, required: false },
     user: UserSchema,
     categories: [CategorySchema],
+}, {
+    collection: 'products'
 });
 
 export type ProductDocument = Document & {

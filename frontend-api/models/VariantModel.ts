@@ -13,6 +13,8 @@ const VariantSchema = new Schema({
     slug: { type: String, required: true },
     type: { type: String, required: true },
     options: [OptionSchema],
+}, {
+    collection: 'variants'
 })
 
 export type VariantDocument = Document & {
