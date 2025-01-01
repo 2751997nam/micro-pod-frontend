@@ -9,9 +9,13 @@ class Time {
         date.setHours(date.getHours() + eval(`${sign}${Math.floor(Math.abs(tzOffset) / 60)}`));
         date.setMinutes(date.getMinutes() + eval(`${sign}${Math.abs(tzOffset) % 60}`));
         const isoString = date.toISOString();
-        const formattedDate = isoString.replace('Z', `${sign}${offsetHours}${offsetMinutes}`);
+        const formattedDate = isoString.replace('Z', `${sign}${offsetHours}${offsetMinutes}`).replace('T', ' ');
 
         return formattedDate;
+    }
+
+    public static formatDate(date: Date): string {
+        return date.toISOString().split('T')[0];
     }
 }
 

@@ -19,7 +19,6 @@ class ApplicationProvider {
             const fileName = filePath.replace(dir, '').replace('.ts', '');
             const registerName = fileName.replace('Impl', '').replace('/', '');
             // eslint-disable-next-line @typescript-eslint/no-var-requires
-            console.log(registerName, `~/${directory}${fileName}`);
             const instance = require(`~/${directory}${fileName}`).default;
             this.container.register(registerName, { useClass: instance }, {lifecycle: Lifecycle.Singleton });
         }
@@ -29,7 +28,6 @@ class ApplicationProvider {
         const dir = `${global.__dir}/${directory}`;
         const fileName = `${directory.split('/').pop()}`.replace('.ts', '');
         const registerName = fileName.replace('Impl', '').replace('/', '');
-        console.log(registerName, `~/${directory}`);
         const instance = require(`~/${directory}`).default;
         this.container.register(registerName, { useClass: instance }, {lifecycle: Lifecycle.Singleton });
     }

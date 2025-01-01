@@ -17,13 +17,13 @@ class ProductCreatedListener implements IListener {
         this.logService = container.resolve("LogService");
     }
     handle = async (channel: Channel, message: ConsumeMessage | null): Promise<void> => {
-        console.log('ProductCreatedListener has message')
+        this.logService.info('ProductCreatedListener has message')
         if (!message) {
             return;
         }
         const parseMessage = message.content.toString();
         try {
-            console.log('ProductCreatedListener', JSON.parse(parseMessage));
+            this.logService.info(parseMessage);
             const data = JSON.parse(parseMessage);
             const product = data.data as IProductSaveData;
             if (data.data.categories) {
@@ -37,6 +37,7 @@ class ProductCreatedListener implements IListener {
             await this.productService.save(product);
             channel.ack(message);
         } catch (error: any) {
+            channel.ack(message);
             this.logService.error('ProductCreatedListener ERROR', [error.message, parseMessage]);
         }
     };

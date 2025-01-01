@@ -1,6 +1,8 @@
 import { ILog } from '~/interfaces/ILog';
 import { injectable, singleton } from 'tsyringe';
 import LogService from '~/services/LogService';
+import Time from '~/utils/Time';
+import fs from 'fs';
 
 @singleton()
 class LogServiceImpl implements LogService {
@@ -29,7 +31,12 @@ class LogServiceImpl implements LogService {
     }
 
     async log(logData: ILog): Promise<void> {
-        console.log(process.env.ELASTIC_LOGS_INDEX, process.env.APP_NAME, logData.message, logData);
+        console.log(Time.formatDateToISO(new Date()), logData.message, logData.context);
+        const logPath = `${global.__dir}/logs/log-${Time.formatDate(new Date())}.log`;
+        if (!fs.existsSync(logPath)) {
+            fs.writeFileSync(logPath, '');
+        }
+        fs.appendFileSync(logPath, `${Time.formatDateToISO(new Date())} | ${logData.message} | ${JSON.stringify(logData.context)} \n`);
 
         // const response = await this.esService.index({
         //     index: process.env.ELASTIC_LOGS_INDEX,
