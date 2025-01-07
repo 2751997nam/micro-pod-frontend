@@ -24,7 +24,7 @@ class ProductServiceImpl implements ProductService {
     }
 
     public async save(input: IProductSaveData): Promise<ProductDocument> {
-        let product = await this.productModel.findOne({ product_id: input.id });
+        let product = await this.productModel.findOne({ id: input.id });
         if (product) {
             await this.productModel.updateOne({ id: product.id }, input);
         } else {

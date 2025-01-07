@@ -4,7 +4,7 @@ const OptionSchema = new Schema({
     id: { type: Number, required: true },
     name: { type: String, required: true },
     slug: { type: String, required: true },
-    image_url: { type: String, required: true },
+    image_url: { type: String, required: false },
 })
 
 const VariantSchema = new Schema({
@@ -29,7 +29,7 @@ export type OptionDocument = Document & {
     id: number
     name: string
     slug: string
-    image_url: string
+    image_url?: string
 }
 
 export const Variant = model<VariantDocument>('Variant', VariantSchema);
