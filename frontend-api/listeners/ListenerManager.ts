@@ -6,17 +6,16 @@ import { container, injectable, singleton } from 'tsyringe';
 class ListenerManager {
     private listeners: Map<string, IListener>;
     private rabbitMQService: RabbitMQService;
-    private productCreatedListener: ProductCreatedListener;
     constructor() {
         console.log('ListenerManager constructor');
         this.rabbitMQService = container.resolve("RabbitMQService");
-        this.productCreatedListener = container.resolve("ProductCreatedListener");
         this.listeners = new Map();
         this.loadListeners();
     }
     
     private async loadListeners(): Promise<void> {
-        this.listeners.set('ProductCreatedListener', this.productCreatedListener);
+        this.listeners.set('ProductCreatedListener', container.resolve("ProductCreatedListener"));
+        this.listeners.set('TemplateChangedListener', container.resolve("TemplateChangedListener"));
     }
 
     public listens(): void {

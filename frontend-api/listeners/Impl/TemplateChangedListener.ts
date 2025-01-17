@@ -7,17 +7,19 @@ import { ICategory } from '~/interfaces/ICategory';
 import { IUser } from '~/interfaces/IUser';
 import LogService from '~/services/LogService';
 import { IProductSaveData } from '~/dto/IProductSaveData';
+import { ITemplateSaveData } from '~/dto/ITemplateSaveData';
+import { TemplateService } from '~/services/TemplateService';
 
 @singleton()
-class ProductCreatedListener implements IListener {
-    private productService: ProductService;
+class TemplateChangedListener implements IListener {
+    private templateService: TemplateService;
     private logService: LogService;
     constructor() {
-        this.productService = container.resolve("ProductService");
+        this.templateService = container.resolve("TemplateService");
         this.logService = container.resolve("LogService");
     }
     handle = async (channel: Channel, message: ConsumeMessage | null): Promise<void> => {
-        this.logService.info('ProductCreatedListener has message')
+        this.logService.info('TemplateChangedListener has message')
         if (!message) {
             return;
         }
@@ -25,34 +27,27 @@ class ProductCreatedListener implements IListener {
         try {
             this.logService.info(parseMessage);
             const data = JSON.parse(parseMessage);
-            const product = data.data as IProductSaveData;
-            if (data.data.categories) {
-                product.categories = data.data.categories as ICategory[];
-            }
+            const product = data.data as ITemplateSaveData;
     
-            if (data.user) {
-                product.user = data.user as IUser;
-            }
-    
-            await this.productService.save(product);
+            await this.templateService.save(product);
             channel.ack(message);
         } catch (error: any) {
             channel.ack(message);
-            this.logService.error('ProductCreatedListener ERROR', [error.message, parseMessage]);
+            this.logService.error('TemplateChangedListener ERROR', [error.message, parseMessage]);
         }
     };
 
     getQueue(): string {
-        return `micro_pod_product_api_product`;
+        return `micro_pod_main_queue`;
     }
     
     getExchange(): string {
-        return 'federate_product.changed.fanout';
+        return 'federate_template.changed.fanout';
     }
 
     listen(): void {
-        console.log('ProductCreatedListener');
+        console.log('TemplateChangedListener');
     }
 }
 
-export default ProductCreatedListener;
+export default TemplateChangedListener;
