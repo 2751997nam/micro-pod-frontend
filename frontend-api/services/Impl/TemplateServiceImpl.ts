@@ -1,17 +1,16 @@
 import { Model } from 'mongoose';
-import { Product, ProductDocument } from '~/models/ProductModel';
 import { container, singleton } from 'tsyringe';
 import LogService from '~/services/LogService';
-import { ProductSku, ProductSkuDocument } from '~/models/ProductSkuModel';
 import { TemplateService } from '../TemplateService';
 import { ITemplateSaveData } from '~/dto/ITemplateSaveData';
+import { TemplateSku, TemplateSkuDocument } from '~/models/TemplateSkuModel';
 
 @singleton()
 class TemplateServiceImpl implements TemplateService {
-    private readonly templateSkuModel: Model<ProductSkuDocument>;
+    private readonly templateSkuModel: Model<TemplateSkuDocument>;
     private readonly logService: LogService;
     constructor() {
-        this.templateSkuModel = ProductSku;
+        this.templateSkuModel = TemplateSku;
         this.logService = container.resolve("LogService");
     }
 
