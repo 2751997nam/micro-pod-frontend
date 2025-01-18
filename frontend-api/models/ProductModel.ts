@@ -42,6 +42,7 @@ export type ProductDocument = Document & {
     description: string,
     status: string,
     category_id: string,
+    template_id: number,
     user: UserDocument,
     categories: [CategoryDocument],
 }

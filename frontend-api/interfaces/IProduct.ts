@@ -12,4 +12,5 @@ export interface IProduct {
     status: string;
     categories?: ICategory[];
     user?: IUser;
+    template_id?: number;
 }
